@@ -6,6 +6,7 @@ import org.springframework.context.annotation.{Bean, Configuration}
 import org.springframework.web.client.RestTemplate
 import progression_radar_yaml_generator.application.GenerateCategoriesYamlUseCase
 import progression_radar_yaml_generator.infrastructure.configuration.properties.JiraProperties
+import progression_radar_yaml_generator.infrastructure.filesystem.FileWriter
 import progression_radar_yaml_generator.infrastructure.repository.JiraCategoryRepository
 import progression_radar_yaml_generator.infrastructure.strategy.{SourceContext, SourceImplementation}
 @EnableConfigurationProperties(Array(classOf[JiraProperties]))
@@ -14,6 +15,9 @@ class DependenciesConfiguration {
 
   @Bean
   var jiraProperties: JiraProperties = _
+
+  @Bean
+  def fileWriter: FileWriter[IO] = new FileWriter[IO]
 
   @Bean
   def jiraCategoryRepository(jiraProperties: JiraProperties): JiraCategoryRepository[IO] =
@@ -33,6 +37,6 @@ class DependenciesConfiguration {
 
   @Bean
   def generateUseCase(jiraCategoryRepository: JiraCategoryRepository[IO]): GenerateCategoriesYamlUseCase[IO] =
-    new GenerateCategoriesYamlUseCase[IO]
+    new GenerateCategoriesYamlUseCase[IO](fileWriter)
 
 }

@@ -1,4 +1,4 @@
-package progression_radar_yaml_generator.infrastructure.command
+package progression_radar_yaml_generator.infrastructure.cli.command
 
 import cats.effect.IO
 import javax.validation.constraints.Size
