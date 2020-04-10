@@ -1,0 +1,9 @@
+jira:
+  # https://confluence.atlassian.com/cloud/api-tokens-938839638.html
+  username: ${JIRA_USERNAME}
+  token: ${JIRA_TOKEN}
+  project: ${JIRA_PROJECT}
+
+spring:
+  main:
+    banner-mode: off
