@@ -25,8 +25,12 @@ class GenerateFileCommand(
     sourceStrategyContext.setSourceContext(SourceImplementation.withName(origin))
     generateUseCase
       .execute(sourceStrategyContext.getCategoryRepository.findAllCategories, outputFile)
-      .handleErrorWith(_ => IO("error!"))
-      .unsafeRunSync()
+      .attempt
+      .unsafeRunSync() match {
+      case Right(result)              => result
+      case Left(exception: Exception) => s"error:  ${exception.getMessage}"
+      case Left(_)                    => "error!"
+    }
   }
 
   @ShellMethod("Show available origins")

@@ -31,7 +31,8 @@ class JiraCategoryRepository[F[_]: Sync](
   }
 
   private def doRequest(request: HttpEntity[String]): F[JiraResponseDTO] = Sync[F].delay(
-    restTemplate.exchange(new URI(""), HttpMethod.GET, request, classOf[JiraResponseDTO]).getBody
+    //restTemplate.exchange(new URI("https://google.com"), HttpMethod.GET, request, classOf[JiraResponseDTO]).getBody
+    JiraResponseDTO(name = "test", "desciption")
   )
 
   private def mapToDomainEntity(responseDTO: JiraResponseDTO): F[Seq[Category]] = Sync[F].delay(Seq.empty[Category])
