@@ -1,6 +1,8 @@
 # Progression Radar yaml generator
 
-[![CircleCI](https://circleci.com/gh/asiermarques/progression-radar-yaml-generator.svg?style=svg)](https://circleci.com/gh/asiermarques/progression-radar-yaml-generator)  ![Cats Friendly Badge](https://typelevel.org/cats/img/cats-badge-tiny.png) 
+[![CircleCI](https://circleci.com/gh/asiermarques/progression-radar-yaml-generator.svg?style=svg)](https://circleci.com/gh/asiermarques/progression-radar-yaml-generator)  
+
+![Cats Friendly Badge](https://typelevel.org/cats/img/cats-badge-tiny.png) 
 
 A command line application to generate the data yaml files from external sources for [Progression Radar](https://github.com/asiermarques/progression-radar) tool.
 
