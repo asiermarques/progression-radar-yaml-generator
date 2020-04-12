@@ -4,19 +4,16 @@ import cats.effect.IO
 import com.fasterxml.jackson.databind.{Module, ObjectMapper}
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
-
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.{Bean, Configuration}
-import org.springframework.web.client.RestTemplate
 import progression_radar_yaml_generator.application.GenerateCategoriesYamlUseCase
-import progression_radar_yaml_generator.infrastructure.configuration.properties.JiraProperties
 import progression_radar_yaml_generator.infrastructure.filesystem.FileWriter
 import progression_radar_yaml_generator.infrastructure.formatter.yaml.CategoriesYamlFormatter
-import progression_radar_yaml_generator.infrastructure.repository.JiraCategoryRepository
+import progression_radar_yaml_generator.infrastructure.strategy.jira.repository.JiraCategoryRepository
 import progression_radar_yaml_generator.infrastructure.strategy.{SourceContext, SourceImplementation}
 import org.springframework.boot.web.client.RestTemplateBuilder
-import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
+import progression_radar_yaml_generator.infrastructure.strategy.jira.configuration.JiraProperties
 
 @EnableConfigurationProperties(Array(classOf[JiraProperties]))
 @Configuration
@@ -44,8 +41,8 @@ class DependenciesConfiguration {
   def categoriesYamlFormatter(objectMapper: ObjectMapper) = new CategoriesYamlFormatter(objectMapper)
 
   @Bean
-  def jiraCategoryRepository(jiraProperties: JiraProperties): JiraCategoryRepository[IO] =
-    new JiraCategoryRepository[IO](new RestTemplate(), jiraProperties)
+  def jiraCategoryRepository(restTemplate: RestTemplate, jiraProperties: JiraProperties): JiraCategoryRepository[IO] =
+    new JiraCategoryRepository[IO](restTemplate, jiraProperties)
 
   @Bean
   def sourceStrategyContext(jiraCategoryRepository: JiraCategoryRepository[IO]): SourceContext[IO] = {
@@ -56,7 +53,7 @@ class DependenciesConfiguration {
 
   @Bean
   def generateUseCase(
-    jiraCategoryRepository: JiraCategoryRepository[IO],
+    fileWriter: FileWriter[IO],
     categoriesYamlFormatter: CategoriesYamlFormatter
   ): GenerateCategoriesYamlUseCase[IO] =
     new GenerateCategoriesYamlUseCase[IO](fileWriter, categoriesYamlFormatter)

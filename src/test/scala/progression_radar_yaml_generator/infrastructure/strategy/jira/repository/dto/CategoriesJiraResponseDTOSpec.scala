@@ -1,8 +1,8 @@
-package progression_radar_yaml_generator.infrastructure.dto
+package progression_radar_yaml_generator.infrastructure.strategy.jira.repository.dto
 
 import progression_radar_yaml_generator.BaseUnitSpec
 import progression_radar_yaml_generator.domain.{Category, KPI}
-import progression_radar_yaml_generator.infrastructure.dto.CategoriesJiraResponseDTO
+import progression_radar_yaml_generator.infrastructure.strategy.jira.repository.dto.CategoriesJiraResponseDTO
 
 class CategoriesJiraResponseDTOSpec extends BaseUnitSpec {
 

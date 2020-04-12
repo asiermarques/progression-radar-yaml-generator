@@ -1,6 +1,6 @@
-package progression_radar_yaml_generator.infrastructure.strategy.spring.validator.annotation;
+package progression_radar_yaml_generator.infrastructure.spring.validator.annotation;
 
-import progression_radar_yaml_generator.infrastructure.strategy.spring.validator.InSourceConstraintValidator;
+import progression_radar_yaml_generator.infrastructure.spring.validator.InSourceConstraintValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

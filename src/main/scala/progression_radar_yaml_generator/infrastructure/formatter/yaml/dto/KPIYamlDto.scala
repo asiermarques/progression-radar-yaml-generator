@@ -1,4 +1,4 @@
-package progression_radar_yaml_generator.infrastructure.dto
+package progression_radar_yaml_generator.infrastructure.formatter.yaml.dto
 
 import progression_radar_yaml_generator.domain.KPI
 

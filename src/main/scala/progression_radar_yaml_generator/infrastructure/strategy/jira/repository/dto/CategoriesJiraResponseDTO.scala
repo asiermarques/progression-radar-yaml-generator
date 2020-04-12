@@ -1,4 +1,4 @@
-package progression_radar_yaml_generator.infrastructure.dto
+package progression_radar_yaml_generator.infrastructure.strategy.jira.repository.dto
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.PropertyNamingStrategy

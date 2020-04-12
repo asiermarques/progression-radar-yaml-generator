@@ -1,4 +1,4 @@
-package progression_radar_yaml_generator.infrastructure.configuration.properties
+package progression_radar_yaml_generator.infrastructure.strategy.jira.configuration
 
 import javax.validation.constraints.NotBlank
 import org.springframework.boot.context.properties.ConfigurationProperties

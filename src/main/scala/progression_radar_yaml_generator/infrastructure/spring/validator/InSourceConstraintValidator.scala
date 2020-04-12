@@ -1,8 +1,8 @@
-package progression_radar_yaml_generator.infrastructure.strategy.spring.validator
+package progression_radar_yaml_generator.infrastructure.spring.validator
 
 import javax.validation.{ConstraintValidator, ConstraintValidatorContext}
 import progression_radar_yaml_generator.infrastructure.strategy.SourceImplementation
-import progression_radar_yaml_generator.infrastructure.strategy.spring.validator.annotation.InSource
+import progression_radar_yaml_generator.infrastructure.spring.validator.annotation.InSource
 
 class InSourceConstraintValidator extends ConstraintValidator[InSource, String] {
 

@@ -1,6 +1,6 @@
 package progression_radar_yaml_generator.fixture
 
-import progression_radar_yaml_generator.infrastructure.dto.{
+import progression_radar_yaml_generator.infrastructure.strategy.jira.repository.dto.{
   CategoriesJiraIssueDTO,
   CategoriesJiraIssueFieldsDTO,
   CategoriesJiraIssueStatusDTO,
