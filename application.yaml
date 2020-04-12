@@ -1,5 +1,6 @@
 jira:
   # https://confluence.atlassian.com/cloud/api-tokens-938839638.html
+  url: ${JIRA_URL}
   username: ${JIRA_USERNAME}
   token: ${JIRA_TOKEN}
   project: ${JIRA_PROJECT}

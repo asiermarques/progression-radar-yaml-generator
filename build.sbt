@@ -14,7 +14,7 @@ libraryDependencies ++= Seq(
   "org.typelevel"                    %% "cats-core"              % "2.0.0",
   "org.typelevel"                    %% "cats-effect"            % "2.1.2",
   "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.1.2",
-  "com.fasterxml.jackson.module"     %% "jackson-module-scala"   % "2.1.2"
+  "com.fasterxml.jackson.module"     %% "jackson-module-scala"   % "2.10.3"
 )
 
 libraryDependencies ++= Seq(

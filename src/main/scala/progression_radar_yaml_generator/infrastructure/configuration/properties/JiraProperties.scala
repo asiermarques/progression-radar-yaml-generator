@@ -12,6 +12,10 @@ class JiraProperties {
 
   @NotBlank
   @BeanProperty
+  var url: String = _
+
+  @NotBlank
+  @BeanProperty
   var username: String = _
 
   @NotBlank

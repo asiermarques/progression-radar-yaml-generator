@@ -16,6 +16,6 @@ class GenerateCategoriesYamlUseCase[F[_]: Sync](fileWriter: FileWriter[F], yamlF
     } yield fileUrl.toString
 
   def generateYaml(categories: Seq[Category]): F[String] =
-    Sync[F].delay("")
+    Sync[F].delay(yamlFormatter.format(categories))
 
 }
