@@ -6,11 +6,13 @@ import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repo
   CategoriesJiraResponseDTO
 }
 import scala.annotation.tailrec
+import scala.util.chaining._
+import scala.language.implicitConversions
 
 object DtoToDomainEntityListTransformer {
 
   def transform(responseDTO: CategoriesJiraResponseDTO): Seq[Category] =
-    processCategoriesKPIs(responseDTO.issues)
+    processCategoriesKPIs(responseDTO.issues) pipe sortCategoriesByName pipe sortCategoriesKPIsByLevel
 
   @tailrec
   private def processCategoriesKPIs(
@@ -50,5 +52,11 @@ object DtoToDomainEntityListTransformer {
           )
       }
     }
+
+  private def sortCategoriesByName(categories: Seq[Category]): Seq[Category] =
+    categories.sortBy(_.name)
+
+  private def sortCategoriesKPIsByLevel(categories: Seq[Category]): Seq[Category] =
+    categories.map(category => category.copy(kpis = category.kpis.sortBy(_.level)))
 
 }
