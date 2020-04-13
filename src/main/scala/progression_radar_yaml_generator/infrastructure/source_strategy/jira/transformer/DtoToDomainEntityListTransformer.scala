@@ -34,7 +34,7 @@ object DtoToDomainEntityListTransformer {
       )
       val categoryName = issueDTO.fields.status.name
       result
-        .find(category => category.name == categoryName)
+        .find(_.name.equals(categoryName))
         .fold(
           processCategoriesKPIs(
             issues.tail,
