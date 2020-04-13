@@ -12,7 +12,8 @@ import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repo
 
 class JiraCategoryRepository[F[_]: Sync](
   restTemplate: RestTemplate,
-  config: JiraProperties
+  config: JiraProperties,
+  dtoToEntityListTransformer: CategoriesJiraResponseDTO => Seq[Category]
 ) extends CategoryRepository[F] {
 
   private val headers: HttpHeaders = new HttpHeaders()
@@ -25,7 +26,7 @@ class JiraCategoryRepository[F[_]: Sync](
     for {
       request       <- createRequest
       categoriesDto <- Sync[F].delay(doRequest(request))
-      categories    <- mapToDomainEntity(categoriesDto)
+      categories    <- Sync[F].delay(dtoToEntityListTransformer(categoriesDto))
     } yield categories
 
   private def createRequest: F[HttpEntity[String]] = Sync[F].delay {
@@ -58,8 +59,6 @@ class JiraCategoryRepository[F[_]: Sync](
         result
     }
 
-  private def mapToDomainEntity(responseDTO: CategoriesJiraResponseDTO): F[Seq[Category]] =
-    Sync[F].delay(toCategories(responseDTO))
 }
 object JiraCategoryRepository {
   final val ITEMS_PER_PAGE: Int       = 50

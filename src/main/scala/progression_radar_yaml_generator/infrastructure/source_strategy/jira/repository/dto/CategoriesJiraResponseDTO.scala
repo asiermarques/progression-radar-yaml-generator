@@ -30,30 +30,4 @@ object CategoriesJiraResponseDTO {
   case class CategoriesJiraResponseDTO(
     @BeanProperty issues: Array[CategoriesJiraIssueDTO]
   )
-
-  def toCategories(responseDTO: CategoriesJiraResponseDTO): Seq[Category] = {
-
-    var categoriesKPIs: HashMap[String, Seq[KPI]] = HashMap.empty[String, Seq[KPI]]
-    responseDTO.issues.foreach { issueDTO =>
-      val category: String = issueDTO.fields.status.name
-      val kpi = KPI(
-        summary = issueDTO.fields.summary,
-        description = issueDTO.fields.description,
-        level = issueDTO.fields.labels
-          .map(_.split("\\D+").filter(_.nonEmpty).map(_.toInt).headOption.getOrElse(0))
-          .headOption
-          .getOrElse(0)
-      )
-
-      if (categoriesKPIs.keys.toArray.exists(_.equals(category)))
-        categoriesKPIs(category) = categoriesKPIs(category) :+ kpi
-      else
-        categoriesKPIs += (category -> Seq(kpi))
-    }
-
-    categoriesKPIs.keys
-      .map(name => Category(key = name.substring(0, 4), name = name, description = "", kpis = categoriesKPIs(name)))
-      .toSeq
-
-  }
 }

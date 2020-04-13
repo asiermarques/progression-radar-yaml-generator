@@ -1,10 +1,11 @@
-package progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.dto
+package progression_radar_yaml_generator.infrastructure.source_strategy.jira.transformer
 
 import progression_radar_yaml_generator.BaseUnitSpec
 import progression_radar_yaml_generator.domain.{Category, KPI}
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.DtoToDomainEntityListTransformer
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.dto.CategoriesJiraResponseDTO._
 
-class CategoriesJiraResponseDTOSpec extends BaseUnitSpec {
+class DtoToDomainEntityListTransformerSpec extends BaseUnitSpec {
 
   val fixture: CategoriesJiraResponseDTO =
     CategoriesJiraResponseDTO(
@@ -36,10 +37,10 @@ class CategoriesJiraResponseDTOSpec extends BaseUnitSpec {
       )
     )
 
-  describe("Jira Response DTO") {
+  describe("Jira Response DTO to Domain Entity transformer") {
 
     it("should be transformed to a list of domain categories") {
-      val result: Seq[Category] = toCategories(fixture)
+      val result: Seq[Category] = DtoToDomainEntityListTransformer.transform(fixture)
       result.size shouldBe 2
 
       val category2 = result.findLast(_.name.equals("category2")).get
@@ -52,6 +53,12 @@ class CategoriesJiraResponseDTOSpec extends BaseUnitSpec {
       firstKPI.summary shouldBe "test2"
       firstKPI.description shouldBe "test2"
       firstKPI.level shouldBe 2
+    }
+
+    it("should transform a dto with empty result") {
+      val result: Seq[Category] =
+        DtoToDomainEntityListTransformer.transform(CategoriesJiraResponseDTO(issues = Array.empty))
+      result.isEmpty shouldBe true
     }
 
   }

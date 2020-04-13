@@ -12,6 +12,9 @@ import progression_radar_yaml_generator.infrastructure.filesystem.FileWriter
 import progression_radar_yaml_generator.infrastructure.formatter.yaml.CategoriesYamlFormatter
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.web.client.RestTemplate
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.DtoToDomainEntityListTransformer.{
+  transform => jiraDtoToEntityListTransformer
+}
 import progression_radar_yaml_generator.infrastructure.source_strategy.{SourceContext, SourceImplementation}
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.configuration.JiraProperties
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.JiraCategoryRepository
@@ -48,7 +51,7 @@ class DependenciesConfiguration {
 
   @Bean
   def jiraCategoryRepository(restTemplate: RestTemplate, jiraProperties: JiraProperties): JiraCategoryRepository[IO] =
-    new JiraCategoryRepository[IO](restTemplate, jiraProperties)
+    new JiraCategoryRepository[IO](restTemplate, jiraProperties, jiraDtoToEntityListTransformer)
 
   @Bean
   def sourceStrategyContext(jiraCategoryRepository: JiraCategoryRepository[IO]): SourceContext[IO] = {

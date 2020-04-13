@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate
 import progression_radar_yaml_generator.domain.Category
 import progression_radar_yaml_generator.BaseUnitSpec
 import progression_radar_yaml_generator.fixture.CategoriesJiraResponseDTOGenerator
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.DtoToDomainEntityListTransformer
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.configuration.JiraProperties
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.JiraCategoryRepository
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.dto.CategoriesJiraResponseDTO._
@@ -20,7 +21,7 @@ class JiraCategoryRepositorySpec extends BaseUnitSpec {
     username = "asiermarques@test.com"
     token = "test"
     project = "TEST"
-  })
+  }, DtoToDomainEntityListTransformer.transform)
 
   before {
     reset(restTemplate)
