@@ -33,14 +33,9 @@ object DtoToDomainEntityListTransformer {
         tags = Seq.empty
       )
       val categoryName = issueDTO.fields.status.name
-      result.find(category => category.name == categoryName) match {
-        case Some(category) => {
-          processCategoriesKPIs(
-            issues.tail,
-            result.filter(_.name != categoryName) :+ category.copy(kpis = category.kpis :+ kpi)
-          )
-        }
-        case None =>
+      result
+        .find(category => category.name == categoryName)
+        .fold(
           processCategoriesKPIs(
             issues.tail,
             result :+ Category(
@@ -50,7 +45,12 @@ object DtoToDomainEntityListTransformer {
               kpis = Seq(kpi)
             )
           )
-      }
+        )(category =>
+          processCategoriesKPIs(
+            issues.tail,
+            result.filter(_.name != categoryName) :+ category.copy(kpis = category.kpis :+ kpi)
+          )
+        )
     }
 
   private def sortCategoriesByName(categories: Seq[Category]): Seq[Category] =
