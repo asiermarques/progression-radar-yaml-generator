@@ -12,8 +12,8 @@ class GenerateCategoriesYamlUseCase[F[_]: Sync](fileWriter: FileWriter[F], yamlF
     for {
       categories <- findCategories()
       yaml       <- generateYaml(categories)
-      fileUrl    <- fileWriter.writeFile(yaml, outputFile)
-    } yield fileUrl.toString
+      file       <- fileWriter.writeFile(yaml, outputFile)
+    } yield file.toString
 
   def generateYaml(categories: Seq[Category]): F[String] =
     Sync[F].delay(yamlFormatter.format(categories))

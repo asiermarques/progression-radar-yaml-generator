@@ -27,9 +27,9 @@ class GenerateFileShellCommand(
       .execute(sourceStrategyContext.getCategoryRepository.findAllCategories, outputFile)
       .attempt
       .unsafeRunSync() match {
-      case Right(result)              => result
+      case Right(result)              => s"success:  ${result}"
       case Left(exception: Exception) => s"error:  ${exception.getMessage}"
-      case Left(_)                    => "error!"
+      case Left(_)                    => "unexpected error!"
     }
   }
 
