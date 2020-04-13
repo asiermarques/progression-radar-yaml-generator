@@ -9,10 +9,10 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 
 @SpringBootTest(
   classes = Array(classOf[ProgressionRadarYamlGeneratorTestApp]),
-  properties = Array {
-    ScriptShellApplicationRunner.SPRING_SHELL_SCRIPT_ENABLED + "=false"
+  properties = Array(
+    ScriptShellApplicationRunner.SPRING_SHELL_SCRIPT_ENABLED + "=false",
     InteractiveShellApplicationRunner.SPRING_SHELL_INTERACTIVE_ENABLED + "=false"
-  }
+  )
 )
 class BaseIntegrationTest extends BaseUnitSpec with BeforeAndAfterAll {
 

@@ -2,18 +2,21 @@ package progression_radar_yaml_generator.infrastructure.formatter.yaml
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import progression_radar_yaml_generator.BaseUnitSpec
+import org.springframework.beans.factory.annotation.Autowired
+import progression_radar_yaml_generator.{BaseIntegrationTest, BaseUnitSpec}
 import progression_radar_yaml_generator.domain.{Category, KPI}
 
-class CategoriesYamlFormatterFunctionalSpec extends BaseUnitSpec {
+class CategoriesYamlFormatterFunctionalSpec extends BaseIntegrationTest {
 
-  def formatter = new CategoriesYamlFormatter(new ObjectMapper(new YAMLFactory()))
+  @Autowired
+  var formatter: CategoriesYamlFormatter = _
 
   val fixture: Seq[Category] = Seq(
     Category(
       key = "test",
       name = "test",
-      description = "test",
+      description = """This is a test
+          |for multiline block""".stripMargin,
       kpis = Seq(
         KPI(summary = "test", description = "test", level = 1, tags = Array("test")),
         KPI(summary = "test", description = "test", level = 1, tags = Array("test"))
@@ -21,22 +24,24 @@ class CategoriesYamlFormatterFunctionalSpec extends BaseUnitSpec {
     )
   )
 
-  val expectedFixture = """---
-- key: "test"
-  name: "test"
-  description: "test"
+  val expectedFixture = """
+- key: test
+  name: test
+  description: |-
+    This is a test
+    for multiline block
   kpis:
-  - summary: "test"
-    description: "test"
+  - summary: test
+    description: test
     level: 1
     tags:
-    - "test"
-  - summary: "test"
-    description: "test"
+    - test
+  - summary: test
+    description: test
     level: 1
     tags:
-    - "test"
-"""
+    - test
+""".trim
 
   describe("Export the category list to yaml") {
 
@@ -45,7 +50,7 @@ class CategoriesYamlFormatterFunctionalSpec extends BaseUnitSpec {
     }
 
     it("should convert an empty list") {
-      formatter.format(Seq.empty[Category]) shouldBe ""
+      formatter.format(Seq.empty[Category]) shouldBe "[]"
     }
 
   }

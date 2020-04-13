@@ -13,10 +13,9 @@ libraryDependencies ++= Seq(
   "net.jcazevedo"                    %% "moultingyaml"           % "0.4.2",
   "org.typelevel"                    %% "cats-core"              % "2.0.0",
   "org.typelevel"                    %% "cats-effect"            % "2.1.2",
-  "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.1.2",
+  "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.10.0",
   "com.fasterxml.jackson.module"     %% "jackson-module-scala"   % "2.10.3"
 )
-
 libraryDependencies ++= Seq(
   springBootModule("spring-boot-starter-test") % "test, it" exclude ("org.mockito", "mockito-core"),
   "org.scalatest"                              %% "scalatest" % "3.1.0" % "test, it",

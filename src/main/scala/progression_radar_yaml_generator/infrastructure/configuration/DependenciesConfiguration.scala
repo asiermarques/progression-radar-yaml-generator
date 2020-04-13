@@ -3,6 +3,7 @@ package progression_radar_yaml_generator.infrastructure.configuration
 import cats.effect.IO
 import com.fasterxml.jackson.databind.{Module, ObjectMapper}
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator.Feature
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.{Bean, Configuration}
@@ -30,7 +31,11 @@ class DependenciesConfiguration {
 
   @Bean
   def objectMapper: ObjectMapper = {
-    val mapper = new ObjectMapper(new YAMLFactory())
+    val YAMLFactory = new YAMLFactory
+    YAMLFactory.configure(Feature.MINIMIZE_QUOTES, true)
+    YAMLFactory.configure(Feature.LITERAL_BLOCK_STYLE, true)
+    YAMLFactory.configure(Feature.WRITE_DOC_START_MARKER, false)
+    val mapper = new ObjectMapper(YAMLFactory)
     mapper.registerModule(DefaultScalaModule)
     mapper
   }
