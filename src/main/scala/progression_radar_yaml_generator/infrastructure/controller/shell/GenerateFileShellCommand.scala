@@ -4,8 +4,8 @@ import cats.effect.IO
 import javax.validation.constraints.Size
 import org.springframework.shell.standard.{ShellComponent, ShellMethod, ShellOption}
 import progression_radar_yaml_generator.application.GenerateCategoriesYamlUseCase
+import progression_radar_yaml_generator.infrastructure.source_strategy.{SourceContext, SourceImplementation}
 import progression_radar_yaml_generator.infrastructure.spring.validator.annotation.InSource
-import progression_radar_yaml_generator.infrastructure.strategy.{SourceContext, SourceImplementation}
 
 @ShellComponent
 class GenerateFileShellCommand(

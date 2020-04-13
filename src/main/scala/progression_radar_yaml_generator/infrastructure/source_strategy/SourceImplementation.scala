@@ -1,4 +1,4 @@
-package progression_radar_yaml_generator.infrastructure.strategy
+package progression_radar_yaml_generator.infrastructure.source_strategy
 
 class SourceImplementation
 object SourceImplementation extends Enumeration {

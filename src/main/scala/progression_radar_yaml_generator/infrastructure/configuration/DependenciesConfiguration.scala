@@ -9,11 +9,11 @@ import org.springframework.context.annotation.{Bean, Configuration}
 import progression_radar_yaml_generator.application.GenerateCategoriesYamlUseCase
 import progression_radar_yaml_generator.infrastructure.filesystem.FileWriter
 import progression_radar_yaml_generator.infrastructure.formatter.yaml.CategoriesYamlFormatter
-import progression_radar_yaml_generator.infrastructure.strategy.jira.repository.JiraCategoryRepository
-import progression_radar_yaml_generator.infrastructure.strategy.{SourceContext, SourceImplementation}
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.web.client.RestTemplate
-import progression_radar_yaml_generator.infrastructure.strategy.jira.configuration.JiraProperties
+import progression_radar_yaml_generator.infrastructure.source_strategy.{SourceContext, SourceImplementation}
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.configuration.JiraProperties
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.JiraCategoryRepository
 
 @EnableConfigurationProperties(Array(classOf[JiraProperties]))
 @Configuration
@@ -34,6 +34,7 @@ class DependenciesConfiguration {
     mapper.registerModule(DefaultScalaModule)
     mapper
   }
+
   @Bean
   def restTemplate(builder: RestTemplateBuilder): RestTemplate = builder.build
 

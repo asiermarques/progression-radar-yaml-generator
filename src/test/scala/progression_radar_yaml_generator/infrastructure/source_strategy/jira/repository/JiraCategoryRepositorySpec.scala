@@ -1,4 +1,4 @@
-package progression_radar_yaml_generator.infrastructure.strategy.jira.repository
+package progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository
 
 import java.net.URI
 
@@ -8,11 +8,9 @@ import org.springframework.web.client.RestTemplate
 import progression_radar_yaml_generator.domain.Category
 import progression_radar_yaml_generator.BaseUnitSpec
 import progression_radar_yaml_generator.fixture.CategoriesJiraResponseDTOGenerator
-import progression_radar_yaml_generator.infrastructure.strategy.jira.configuration.JiraProperties
-import progression_radar_yaml_generator.infrastructure.strategy.jira.repository.dto.{
-  CategoriesJiraIssueDTO,
-  CategoriesJiraResponseDTO
-}
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.configuration.JiraProperties
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.JiraCategoryRepository
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.dto.CategoriesJiraResponseDTO._
 
 class JiraCategoryRepositorySpec extends BaseUnitSpec {
 

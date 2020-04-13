@@ -1,4 +1,4 @@
-package progression_radar_yaml_generator.infrastructure.strategy.jira.repository
+package progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository
 
 import java.net.URI
 
@@ -7,11 +7,8 @@ import cats.implicits._
 import org.springframework.http.{HttpEntity, HttpHeaders, HttpMethod}
 import org.springframework.web.client.RestTemplate
 import progression_radar_yaml_generator.domain.{Category, CategoryRepository}
-import progression_radar_yaml_generator.infrastructure.strategy.jira.configuration.JiraProperties
-import progression_radar_yaml_generator.infrastructure.strategy.jira.repository.dto.{
-  CategoriesJiraIssueDTO,
-  CategoriesJiraResponseDTO
-}
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.configuration.JiraProperties
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.dto.CategoriesJiraResponseDTO._
 
 class JiraCategoryRepository[F[_]: Sync](
   restTemplate: RestTemplate,
@@ -62,7 +59,7 @@ class JiraCategoryRepository[F[_]: Sync](
     }
 
   private def mapToDomainEntity(responseDTO: CategoriesJiraResponseDTO): F[Seq[Category]] =
-    Sync[F].delay(CategoriesJiraResponseDTO.toCategories(responseDTO))
+    Sync[F].delay(toCategories(responseDTO))
 }
 object JiraCategoryRepository {
   final val ITEMS_PER_PAGE: Int       = 50
