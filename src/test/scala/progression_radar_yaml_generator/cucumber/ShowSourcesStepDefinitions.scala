@@ -27,6 +27,10 @@ class ShowSourcesStepDefinitions extends BaseUnitSpec {
   def the_following_implemented_sources(dataTable: DataTable): Unit =
     shellCommand = new GenerateFileShellCommand(useCase, sourceContext, dataTable.asList.asScala.toSeq)
 
+  @Given("there are no implemented sources")
+  def there_are_no_mplemented_sources(): Unit =
+    shellCommand = new GenerateFileShellCommand(useCase, sourceContext, Seq.empty[String])
+
   @When("the user executes the show-sources command")
   def the_user_executes_the_command(): Unit = result = shellCommand.showSources
 

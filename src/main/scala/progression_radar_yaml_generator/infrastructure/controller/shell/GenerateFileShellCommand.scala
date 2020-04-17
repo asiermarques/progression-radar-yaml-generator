@@ -35,5 +35,5 @@ class GenerateFileShellCommand(
   }
 
   @ShellMethod("Show available sources")
-  def showSources: String = availableSources.reduce(_ + ", " + _)
+  def showSources: String = availableSources.reduceOption(_ + ", " + _).getOrElse("There are no implementations yet")
 }
