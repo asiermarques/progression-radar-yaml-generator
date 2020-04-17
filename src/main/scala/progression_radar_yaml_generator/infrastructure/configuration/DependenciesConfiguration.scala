@@ -67,4 +67,7 @@ class DependenciesConfiguration {
   ): GenerateCategoriesYamlUseCase[IO] =
     new GenerateCategoriesYamlUseCase[IO](fileWriter, categoriesYamlFormatter)
 
+  @Bean
+  def availableSources: Seq[String] = SourceImplementation.values.toSeq.map(_.toString)
+
 }

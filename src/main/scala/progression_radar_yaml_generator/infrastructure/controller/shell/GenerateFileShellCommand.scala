@@ -10,7 +10,8 @@ import progression_radar_yaml_generator.infrastructure.spring.validator.annotati
 @ShellComponent
 class GenerateFileShellCommand(
   generateUseCase: GenerateCategoriesYamlUseCase[IO],
-  sourceStrategyContext: SourceContext[IO]
+  sourceStrategyContext: SourceContext[IO],
+  availableSources: Seq[String]
 ) {
 
   @ShellMethod("Generate the yaml from Jira project")
@@ -33,6 +34,6 @@ class GenerateFileShellCommand(
     }
   }
 
-  @ShellMethod("Show available origins")
-  def showOrigins: String = SourceImplementation.values.toSeq.map(_.toString).reduce(_ + ", " + _)
+  @ShellMethod("Show available sources")
+  def showSources: String = availableSources.reduce(_ + ", " + _)
 }

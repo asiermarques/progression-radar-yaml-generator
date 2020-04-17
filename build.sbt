@@ -19,5 +19,8 @@ libraryDependencies ++= Seq(
 libraryDependencies ++= Seq(
   springBootModule("spring-boot-starter-test") % "test, it" exclude ("org.mockito", "mockito-core"),
   "org.scalatest"                              %% "scalatest" % "3.1.0" % "test, it",
-  "org.mockito"                                %% "mockito-scala" % "1.13.5" % "test, it"
+  "org.mockito"                                %% "mockito-scala" % "1.13.5" % "test, it",
+  "io.cucumber"                                % "cucumber-junit" % "5.6.0" % "test, it",
+  "io.cucumber"                                % "cucumber-spring" % "5.6.0" % "test, it",
+  "io.cucumber"                                % "cucumber-java" % "5.6.0" % "test, it"
 )
