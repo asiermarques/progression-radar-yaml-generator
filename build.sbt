@@ -17,10 +17,13 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.module"     %% "jackson-module-scala"   % "2.10.3"
 )
 libraryDependencies ++= Seq(
-  springBootModule("spring-boot-starter-test") % "test, it" exclude ("org.mockito", "mockito-core"),
-  "org.scalatest"                              %% "scalatest" % "3.1.0" % "test, it",
-  "org.mockito"                                %% "mockito-scala" % "1.13.5" % "test, it",
-  "io.cucumber"                                % "cucumber-junit" % "5.6.0" % "test, it",
-  "io.cucumber"                                % "cucumber-spring" % "5.6.0" % "test, it",
-  "io.cucumber"                                % "cucumber-java" % "5.6.0" % "test, it"
+  springBootModule("spring-boot-starter-test") % Test exclude ("org.mockito", "mockito-core"),
+  "org.scalatest"                              %% "scalatest" % "3.1.0" % Test,
+  "org.mockito"                                %% "mockito-scala" % "1.13.5" % Test,
+  "io.cucumber"                                % "cucumber-junit" % "5.6.0" % Test,
+  "io.cucumber"                                % "cucumber-spring" % "5.6.0" % Test,
+  "io.cucumber"                                % "cucumber-java" % "5.6.0" % Test,
+  "com.novocode"                               % "junit-interface" % "0.11" % Test
 )
+
+testOptions in Test := Seq(Tests.Argument(TestFrameworks.JUnit, "-a"))
