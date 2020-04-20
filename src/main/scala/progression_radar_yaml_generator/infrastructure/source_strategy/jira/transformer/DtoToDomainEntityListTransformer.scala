@@ -22,17 +22,9 @@ object DtoToDomainEntityListTransformer {
     if (issues.isEmpty)
       result
     else {
-      val issueDTO = issues.head
-      val kpi = KPI(
-        summary = issueDTO.fields.summary,
-        description = issueDTO.fields.description,
-        level = issueDTO.fields.labels
-          .map(_.split("\\D+").filter(_.nonEmpty).map(_.toInt).headOption.getOrElse(0))
-          .headOption
-          .getOrElse(0),
-        tags = Seq.empty
-      )
+      val issueDTO     = issues.head
       val categoryName = issueDTO.fields.status.name
+      val kpi          = createKPI(issueDTO)
       result
         .find(_.name.equals(categoryName)) match {
         case Some(category) =>
@@ -44,7 +36,7 @@ object DtoToDomainEntityListTransformer {
           processCategoriesKPIs(
             issues.tail,
             result :+ Category(
-              key = categoryName.substring(4).toLowerCase,
+              key = categoryName.substring(0, 4).toLowerCase,
               name = categoryName,
               description = "",
               kpis = Seq(kpi)
@@ -53,6 +45,16 @@ object DtoToDomainEntityListTransformer {
       }
 
     }
+
+  private def createKPI(issueDTO: CategoriesJiraIssueDTO) = KPI(
+    summary = issueDTO.fields.summary,
+    description = issueDTO.fields.description,
+    level = issueDTO.fields.labels
+      .map(_.split("\\D+").filter(_.nonEmpty).map(_.toInt).headOption.getOrElse(0))
+      .headOption
+      .getOrElse(0),
+    tags = Seq.empty
+  )
 
   private def sortCategoriesByName(categories: Seq[Category]): Seq[Category] =
     categories.sortBy(_.name)

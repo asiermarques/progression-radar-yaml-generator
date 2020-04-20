@@ -10,6 +10,8 @@ import progression_radar_yaml_generator.domain.{Category, CategoryRepository}
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.configuration.JiraProperties
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.dto.CategoriesJiraResponseDTO._
 
+import scala.annotation.tailrec
+
 class JiraCategoryRepository[F[_]: Sync](
   restTemplate: RestTemplate,
   config: JiraProperties,
@@ -34,6 +36,7 @@ class JiraCategoryRepository[F[_]: Sync](
     new HttpEntity[String](headers)
   }
 
+  @tailrec
   private def doRequest(
     request: HttpEntity[String],
     result: CategoriesJiraResponseDTO = CategoriesJiraResponseDTO(issues = Array.empty[CategoriesJiraIssueDTO]),
