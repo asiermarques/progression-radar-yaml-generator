@@ -23,7 +23,7 @@ Feature: generate the yaml file from jira using command line
     Given a Jira server with a project with a key "CP"
     And the project has the following issues data:
     | issue summary         | description       | label        | status                |
-    | active listening      | multiline\nline  | Level 1      | communication         |
+    | active listening      | multiline\nline   | Level 1      | communication         |
     | drives meetings       | test              | Level 2      | communication         |
     | solid principles      | test              | Level 1      | software engineering  |
     | DDD                   | test              | L 2          | software engineering  |
