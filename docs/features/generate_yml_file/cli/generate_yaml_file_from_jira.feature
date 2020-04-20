@@ -22,11 +22,11 @@ Feature: generate the yaml file from jira using command line
 
     Given a Jira server with a project with a key "CP"
     And the project has the following issues data:
-    | issue summary              | label        | status                |
-    | active listening           | Level 1      | communication         |
-    | drives meetings            | Level 2      | communication         |
-    | solid principles           | Level 1      | software engineering  |
-    | DDD                        | L 2          | software engineering  |
+    | issue summary         | description       | label        | status                |
+    | active listening      | multiline\nline  | Level 1      | communication         |
+    | drives meetings       | test              | Level 2      | communication         |
+    | solid principles      | test              | Level 1      | software engineering  |
+    | DDD                   | test              | L 2          | software engineering  |
 
   Scenario: creating the yaml file without errors
 
@@ -39,11 +39,13 @@ Feature: generate the yaml file from jira using command line
       description: ""
       kpis:
       - summary: active listening
-        description: ""
+        description: |-
+          multiline
+          line
         level: 1
         tags: []
       - summary: drives meetings
-        description: ""
+        description: test
         level: 2
         tags: []
     - key: soft
@@ -51,11 +53,11 @@ Feature: generate the yaml file from jira using command line
       description: ""
       kpis:
       - summary: solid principles
-        description: ""
+        description: test
         level: 1
         tags: []
       - summary: DDD
-        description: ""
+        description: test
         level: 2
         tags: []
     """

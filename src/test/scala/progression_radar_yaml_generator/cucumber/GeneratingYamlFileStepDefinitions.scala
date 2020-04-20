@@ -67,7 +67,7 @@ class GeneratingYamlFileStepDefinitions extends BaseIntegrationTest {
           CategoriesJiraIssueDTO(
             fields = CategoriesJiraIssueFieldsDTO(
               summary = issue("issue summary"),
-              description = "",
+              description = issue("description"),
               labels = Array(issue("label")),
               status = CategoriesJiraIssueStatusDTO(name = issue("status"))
             )
