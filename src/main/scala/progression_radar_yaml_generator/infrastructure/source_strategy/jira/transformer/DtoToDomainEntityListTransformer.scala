@@ -5,7 +5,7 @@ import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repo
   CategoriesJiraIssueDTO,
   CategoriesJiraResponseDTO
 }
-import scala.annotation.tailrec
+
 import scala.util.chaining._
 import scala.language.implicitConversions
 
@@ -17,15 +17,16 @@ object DtoToDomainEntityListTransformer {
   def processCategoriesKPIs(issues: Array[CategoriesJiraIssueDTO]): Seq[Category] =
     issues
       .map(issue => (issue.fields.status.name, createKPI(issue)))
-      .groupMap(_._1)(_._2)
-      .map(kpiMap =>
-        Category(
-          name = kpiMap._1,
-          key = kpiMap._1.substring(0, 4).toLowerCase,
-          description = "",
-          kpis = kpiMap._2.toSeq
-        )
-      )
+      .groupMap(_._1: String)(_._2: KPI)
+      .map({
+        case (categoryName: String, kpiList: Array[KPI]) =>
+          Category(
+            name = categoryName,
+            key = categoryName.substring(0, 4).toLowerCase,
+            description = "",
+            kpis = kpiList.toSeq
+          )
+      })
       .toSeq
 
   private def createKPI(issueDTO: CategoriesJiraIssueDTO) = KPI(
