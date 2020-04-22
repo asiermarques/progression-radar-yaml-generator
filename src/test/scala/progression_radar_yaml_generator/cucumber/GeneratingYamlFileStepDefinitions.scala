@@ -53,7 +53,7 @@ class GeneratingYamlFileStepDefinitions extends BaseIntegrationTest {
   @AfterAll
   def finish() = outputFile.delete()
 
-  @Given("a Jira server with a project with a key {string}")
+  @Given("we have a Jira that has a project with the key {string}")
   def a_Jira_server_with_a_project_with_a_key(projectKey: String): Unit =
     jiraProjectId = projectKey
 
@@ -75,6 +75,10 @@ class GeneratingYamlFileStepDefinitions extends BaseIntegrationTest {
         )
         .toArray
     )
+
+  @Given("the project has no configured issues")
+  def the_project_has_no_issues_configured(): Unit =
+    jiraData = CategoriesJiraResponseDTO(issues = Array.empty[CategoriesJiraIssueDTO])
 
   @When("the user executes the generate command with the {string} source and the full path of the target file")
   def the_user_executes_the_generate_command_with_the_source_and_the_full_path_of_the_target_file(
@@ -104,11 +108,14 @@ class GeneratingYamlFileStepDefinitions extends BaseIntegrationTest {
     result shouldBe s"success:  ${outputFile.getAbsolutePath}"
 
   @Then("the file contains the following yaml content:")
-  def the_file_contains_the_following_yaml_content(yamlContent: String): Unit = {
+  def the_file_contains_the_following_yaml_content(yamlContent: String): Unit =
+    getFileContent(outputFile.getAbsolutePath) shouldBe yamlContent.trim
+
+  private def getFileContent(path: String): String = {
     val source = Source.fromFile(outputFile.getAbsolutePath)
     val result = source.getLines.toList.mkString("\n")
-    result shouldBe yamlContent.trim
     source.close
+    result
   }
 
   private def setUpJiraRepository(): Unit = {
