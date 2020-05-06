@@ -2,7 +2,7 @@ package progression_radar_yaml_generator.infrastructure.source_strategy.jira.tra
 
 import progression_radar_yaml_generator.BaseUnitSpec
 import progression_radar_yaml_generator.domain.{Category, KPI}
-import progression_radar_yaml_generator.infrastructure.source_strategy.jira.DtoToDomainEntityListTransformer
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.transformer.DtoToDomainEntityListTransformer
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.dto.CategoriesJiraResponseDTO._
 
 class DtoToDomainEntityListTransformerSpec extends BaseUnitSpec {

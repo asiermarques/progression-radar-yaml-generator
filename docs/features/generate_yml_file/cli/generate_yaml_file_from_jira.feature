@@ -38,7 +38,7 @@ Feature: generate the yaml file from jira using command line
     Then the client receives a success output with the path of the created file
     And the file contains the following yaml content:
     """
-    - key: comm
+    - key: cmmn
       name: communication
       description: ""
       kpis:
@@ -52,7 +52,7 @@ Feature: generate the yaml file from jira using command line
         description: test
         level: 2
         tags: []
-    - key: soft
+    - key: se
       name: software engineering
       description: ""
       kpis:

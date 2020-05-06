@@ -1,4 +1,4 @@
-package progression_radar_yaml_generator.infrastructure.source_strategy.jira
+package progression_radar_yaml_generator.infrastructure.source_strategy.jira.transformer
 
 import progression_radar_yaml_generator.domain.{Category, KPI}
 import progression_radar_yaml_generator.infrastructure.source_strategy.jira.repository.dto.CategoriesJiraResponseDTO.{
@@ -22,7 +22,7 @@ object DtoToDomainEntityListTransformer {
         case (categoryName: String, kpiList: Array[KPI]) =>
           Category(
             name = categoryName,
-            key = categoryName.substring(0, 4).toLowerCase,
+            key = Category.createKeyForCategoryName(categoryName),
             description = "",
             kpis = kpiList.toSeq
           )

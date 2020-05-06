@@ -12,7 +12,7 @@ import progression_radar_yaml_generator.infrastructure.filesystem.FileWriter
 import progression_radar_yaml_generator.infrastructure.formatter.yaml.CategoriesYamlFormatter
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.web.client.RestTemplate
-import progression_radar_yaml_generator.infrastructure.source_strategy.jira.DtoToDomainEntityListTransformer.{
+import progression_radar_yaml_generator.infrastructure.source_strategy.jira.transformer.DtoToDomainEntityListTransformer.{
   transform => jiraDtoToEntityListTransformer
 }
 import progression_radar_yaml_generator.infrastructure.source_strategy.{SourceContext, SourceImplementation}
